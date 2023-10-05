@@ -1,0 +1,14 @@
+<div>
+    <span class="p-float-label">
+        <textarea rows="3" cols="100" pInputTextarea [autoResize]="true" 
+        [(ngModel)]="contenido"></textarea> 
+        <label for="float-input"> Ingresar pedido</label>
+    </span>
+
+    <p-button label=" Subir consulta "
+    (click)="onClick(ticket)"
+    styleClass="p-button-text"
+    class="p-inputtext-sm"
+    [disabled]="contenido.length === 0"></p-button>
+
+</div>

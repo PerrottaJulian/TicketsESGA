@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
 import Ticket from '../interfaces/ticket-interface';
 import { Observable } from 'rxjs';
-import { getDocs, getFirestore } from 'firebase/firestore';
+import { doc, getDocs,getDoc, getFirestore } from 'firebase/firestore';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
-  constructor(private firestore: Firestore ) { }
+  readonly APIurl = "https://localhost:7161/api/TicketsDB/"
   
+  constructor(private http:HttpClient ) { 
+  }
+   
 
-  addTicket(ticket:Ticket){
-    const ticketRef = collection(this.firestore, 'tickets')
-    return addDoc(ticketRef, ticket)
+  addTicket(contenido:string, timestamp: string){
+    const ticketData = {
+      contenido: contenido,
+      timestamp: timestamp
+    }
+
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+    });
+    
+    return this.http.post(this.APIurl+"AddTicket", ticketData, {headers: headers})
   }
 
-  getTickets()/*: Observable<Ticket[]> */{
-    const ticketRef = collection(this.firestore, 'tickets')
-    return collectionData(ticketRef, {idField: "id"} ) as Observable<Ticket[]>
+   getTickets(){
+    return this.http.get(this.APIurl+"GetTickets")
     
   }
   

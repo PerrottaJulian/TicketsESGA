@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../services/ticket-service.service';
 import Ticket from '../interfaces/ticket-interface';
-import { Query } from 'firebase/firestore';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,30 +10,23 @@ import { Query } from 'firebase/firestore';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit{
-  interruptor:boolean
-  tickets_list: Ticket[];
+  tickets_list: any = []
 
   constructor(private ticketservice: TicketService){ 
-    this.interruptor = false
-
-    this.tickets_list = [];
+    this.getTickets()
   }
 
   ngOnInit(): void {
-    this.tickets_list.push({
-      contenido: "Ticket de prueba"
-    })
+    this.getTickets()
   }
 
-  verLista(): void {
+
+  getTickets(){
     this.ticketservice.getTickets().subscribe(tickets => {
-      console.log(tickets)
-      this.tickets_list = tickets;
-    }) 
+      this.tickets_list = tickets
+    })
+    
     
   }
-
-
-
 
 }

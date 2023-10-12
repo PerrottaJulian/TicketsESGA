@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TicketService } from '../services/ticket-service.service';
 import Ticket from '../interfaces/ticket-interface';
+import { HttpClient } from '@angular/common/http';
+import { TicketListComponent } from '../ticket-list/ticket-list.component';
 
 
 @Component({
@@ -12,6 +14,7 @@ export class TicketInputComponent {
   loading:boolean
   contenido:string
   ticket: Ticket
+  id = "newTicket"
 
   constructor( private ticketservice: TicketService){
     this.contenido = ""
@@ -22,11 +25,27 @@ export class TicketInputComponent {
   }
 
   onClick(){
-    this.ticket = {
-      contenido: this.contenido
+    const date = new Date()
+    var hours: string
+    var minutes: string
+    if (date.getHours() < 10){
+      hours = "0"+date.getHours()
+    }else{
+      hours = date.getHours().toString()
     }
-    this.ticketservice.addTicket(this.ticket)
+
+    if (date.getMinutes() < 10){
+      minutes = "0"+date.getMinutes()
+    }else{
+      minutes = date.getMinutes().toString()
+    }
+    
+    
+    this.ticketservice.addTicket(this.contenido, date.toDateString() + " "+ hours+":"+minutes).subscribe(data => {
+      alert(data)
+    })
     this.contenido = ""
+    //location.reload()
   }
 
 }

@@ -1,9 +1,8 @@
-<p-button label=" Ver Lista "
-    (click)="verLista()"
-    class="p-inputtext-sm">
-</p-button> 
+<p-button label="Ver Tickek"
+(click)="getTickets()"></p-button>
 
 <div *ngFor="let ticket of tickets_list">
-    <p>{{ ticket.contenido }}</p>
+    <p>* {{ ticket.contenido }}  At: {{ticket.hora}}</p>
     <hr>
-</div>
+</div> 
+

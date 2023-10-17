@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../services/ticket-service.service';
-import Ticket from '../interfaces/ticket-interface';
-import { Observable } from 'rxjs';
+
 
 
 @Component({

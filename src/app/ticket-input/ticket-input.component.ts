@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { TicketService } from '../services/ticket-service.service';
-import Ticket from '../interfaces/ticket-interface';
-import { HttpClient } from '@angular/common/http';
-import { TicketListComponent } from '../ticket-list/ticket-list.component';
 
 
 @Component({
@@ -13,14 +10,10 @@ import { TicketListComponent } from '../ticket-list/ticket-list.component';
 export class TicketInputComponent {
   loading:boolean
   contenido:string
-  ticket: Ticket
   id = "newTicket"
 
   constructor( private ticketservice: TicketService){
     this.contenido = ""
-    this.ticket = {
-      contenido: this.contenido
-    }
     this.loading = false
   }
 

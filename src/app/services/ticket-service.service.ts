@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData } from '@angular/fire/firestore';
-import Ticket from '../interfaces/ticket-interface';
-import { Observable } from 'rxjs';
-import { doc, getDocs,getDoc, getFirestore } from 'firebase/firestore';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
